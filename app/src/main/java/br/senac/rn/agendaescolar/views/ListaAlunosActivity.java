@@ -17,7 +17,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aluno_lista);
+        setContentView(R.layout.listactivity);
 
         btnIncluir = (Button) findViewById(R.id.BtnCadastrar_ListaActivity);
         lstAlunos = (ListView)findViewById(R.id.listaAluno_ListaActivity);
