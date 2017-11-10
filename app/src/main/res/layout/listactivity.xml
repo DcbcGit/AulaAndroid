@@ -4,9 +4,14 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <EditText
+            android:id="@+id/txtNomeAluno_ListaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     <ListView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:id="@+id/listaAluno_ListaActivity" />
+              android:id="@+id/listaAluno_ListaActivity"/>
 
     <Button
             android:id="@+id/BtnCadastrar_ListaActivity"
