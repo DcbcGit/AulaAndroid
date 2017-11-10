@@ -37,8 +37,16 @@ public class Aluno implements Serializable {
         return id.hashCode();
     }
 
-    public void ToString(){
-
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", Endereco='" + Endereco + '\'' +
+                ", fone='" + fone + '\'' +
+                ", site='" + site + '\'' +
+                ", nota=" + nota +
+                '}';
     }
 
     public void setId(Integer id) {
