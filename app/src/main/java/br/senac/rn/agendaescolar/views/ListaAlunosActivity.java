@@ -1,8 +1,11 @@
 package br.senac.rn.agendaescolar.views;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -45,7 +48,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         lstAlunos.add(new Aluno(
                 "Gerusa Oliveira",
                 "Rua da Diatomida, 357",
-                "84991727899",
+                "8491727899",
                 "http://www.facebook.com/BandeiraCosta",
                 9.0));
 
@@ -73,7 +76,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 item.setIntent(intAV);
                 break;
             case R.id.item_mapa:
-                intAV.setData(Uri.parse("geo:0,0?q="+alunoSele.getEndereco()));
+                intAV.setData(Uri.parse("geo:0,0?q=" + alunoSele.getEndereco()));
                 item.setIntent(intAV);
                 break;
             case R.id.item_deletar:
@@ -81,8 +84,37 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Atualizalista();
                 break;
             case R.id.item_ligar:
-                intAV.setData(Uri.parse("tel:"+alunoSele.getFone()));
-                item.setIntent(intAV);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 2);
+                } else {
+                    intAV = new Intent(Intent.ACTION_CALL);
+                    intAV.setData(Uri.parse("tel:" + alunoSele.getFone()));
+                    item.setIntent(intAV);
+                }
+                break;
+            case R.id.item_msg_whatsapp:
+
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("content://com.android.contacts/data/" + alunoSele.getFone()));
+                i.setType("text/plain");
+                i.setPackage("com.whatsapp");           // so that only Whatsapp reacts and not the chooser
+                i.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                i.putExtra(Intent.EXTRA_TEXT, "I'm the body.");
+                startActivity(i);
+
+
+               // Uri uri = Uri.parse("smsto:" + alunoSele.getFone());
+                //Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+                //i.putExtra(Intent.EXTRA_TEXT, txtNomeAluno.getText().toString());
+                //i.setType("text/plain");
+                //i.setPackage("com.whatsapp");
+                //startActivity(Intent.createChooser(i, ""));
+
+
+                //intAV = new Intent(Intent.ACTION_SEND);
+                //intAV.putExtra(Intent.EXTRA_TEXT, txtNomeAluno.getText().toString());
+                //intAV.setPackage("com.whatsapp");
+                //intAV.setType("text/plain");
+                //startActivity(intAV);
                 break;
         }
 
@@ -110,6 +142,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     protected View.OnClickListener onBtnCadastrar;
+
     {
         onBtnCadastrar = new View.OnClickListener() {
             @Override

@@ -21,4 +21,8 @@
         android:id="@+id/item_deletar"
         android:title="Deletar" />
 
+    <item
+        android:id="@+id/item_msg_whatsapp"
+        android:title="Msg whatsapp" />
+
 </menu>
