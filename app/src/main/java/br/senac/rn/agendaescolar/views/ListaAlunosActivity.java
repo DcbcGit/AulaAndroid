@@ -93,22 +93,20 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.item_msg_whatsapp:
+                String tt = "sd";
+                //Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("content://com.android.contacts/data/" + alunoSele.getFone()));
+                //i.setType("text/plain");
+                //i.setPackage("com.whatsapp");           // so that only Whatsapp reacts and not the chooser
+                //i.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                //i.putExtra(Intent.EXTRA_TEXT, "I'm the body.");
+                //startActivity(i);
 
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("content://com.android.contacts/data/" + alunoSele.getFone()));
-                i.setType("text/plain");
-                i.setPackage("com.whatsapp");           // so that only Whatsapp reacts and not the chooser
-                i.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                i.putExtra(Intent.EXTRA_TEXT, "I'm the body.");
-                startActivity(i);
-
-
-               // Uri uri = Uri.parse("smsto:" + alunoSele.getFone());
+                // Uri uri = Uri.parse("smsto:" + alunoSele.getFone());
                 //Intent i = new Intent(Intent.ACTION_SENDTO, uri);
                 //i.putExtra(Intent.EXTRA_TEXT, txtNomeAluno.getText().toString());
                 //i.setType("text/plain");
                 //i.setPackage("com.whatsapp");
                 //startActivity(Intent.createChooser(i, ""));
-
 
                 //intAV = new Intent(Intent.ACTION_SEND);
                 //intAV.putExtra(Intent.EXTRA_TEXT, txtNomeAluno.getText().toString());
