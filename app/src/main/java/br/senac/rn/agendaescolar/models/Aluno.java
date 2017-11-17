@@ -1,12 +1,15 @@
 package br.senac.rn.agendaescolar.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 public class Aluno implements Serializable {
 
     private Integer id;
     private String nome;
-    private String Endereco;
+    private String endereco;
     private String fone;
     private String site;
     private double nota;
@@ -16,7 +19,16 @@ public class Aluno implements Serializable {
 
     public Aluno(String nome, String endereco, String fone, String site, double nota) {
         this.nome = nome;
-        Endereco = endereco;
+        this.endereco = endereco;
+        this.fone = fone;
+        this.site = site;
+        this.nota = nota;
+    }
+
+    public Aluno(Integer id, String nome, String endereco, String fone, String site, double nota) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
         this.fone = fone;
         this.site = site;
         this.nota = nota;
@@ -37,16 +49,23 @@ public class Aluno implements Serializable {
         return id.hashCode();
     }
 
+    // @Override
+    //public String toString() {
+    //  return String.format("%03d - %s \nTel: %s\nEnd: %s ", this.id, this.nome, this.fone, endereco);
+    //}
+
+
     @Override
     public String toString() {
         return "Aluno{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", Endereco='" + Endereco + '\'' +
+                ", endereco='" + endereco + '\'' +
                 ", fone='" + fone + '\'' +
                 ", site='" + site + '\'' +
                 ", nota=" + nota +
                 '}';
+
     }
 
     public void setId(Integer id) {
@@ -58,7 +77,7 @@ public class Aluno implements Serializable {
     }
 
     public void setEndereco(String endereco) {
-        Endereco = endereco;
+        this.endereco = endereco;
     }
 
     public void setFone(String fone) {
@@ -74,26 +93,27 @@ public class Aluno implements Serializable {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public String getEndereco() {
-        return Endereco;
+        return this.endereco;
     }
 
     public String getFone() {
-        return fone;
+        return this.fone;
     }
 
     public String getSite() {
-        return site;
+        return this.site;
     }
 
     public double getNota() {
-        return nota;
+        return this.nota;
     }
+
 }
