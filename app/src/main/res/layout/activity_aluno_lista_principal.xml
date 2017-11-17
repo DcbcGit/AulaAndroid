@@ -16,10 +16,9 @@
         android:textSize="20sp"
         android:textColor="#FFFFFF"
 
-        android:elevation="15dp"
+        android:elevation="10dp"
         android:stateListAnimator="@null"
         android:background="@drawable/fundo_botao_adicionar"
-
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="+"/>

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Aluno implements Serializable {
 
-    private Integer id;
+    private Integer id = 0;
     private String nome;
     private String endereco;
     private String fone;
