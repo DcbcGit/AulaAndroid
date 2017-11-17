@@ -52,7 +52,8 @@ public class AlunoFormularioActivity extends AppCompatActivity {
     }
 
     protected Aluno pegaDadosTela() {
-        Aluno aluno = new Aluno();
+        Aluno aluno = alunoEdicao == null ? new Aluno() : alunoEdicao;
+
         aluno.setNome(txtNome.getText().toString());
         aluno.setEndereco(txtEndereco.getText().toString());
         aluno.setSite(txtSite.getText().toString());
@@ -64,7 +65,12 @@ public class AlunoFormularioActivity extends AppCompatActivity {
 
     protected void salvarTela() {
         AlunoDao aluDao = new AlunoDao(this);
-        aluDao.inserir(pegaDadosTela());
+
+        Aluno aluRet = pegaDadosTela();
+        if (aluRet.getId() == 0)
+            aluDao.inserir(aluRet);
+        else
+            aluDao.atualiza(aluRet);
     }
 
     protected void carregaTela() {
@@ -74,9 +80,9 @@ public class AlunoFormularioActivity extends AppCompatActivity {
 
     protected void gerarComponentes() {
         txtNome = (EditText) findViewById(R.id.txtNomeAluno_FormAluno);
-        txtEndereco = (EditText) findViewById(R.id.txtNomeAluno_FormAluno);
-        txtFone = (EditText) findViewById(R.id.txtNomeAluno_FormAluno);
-        txtSite = (EditText) findViewById(R.id.txtNomeAluno_FormAluno);
+        txtEndereco = (EditText) findViewById(R.id.txtEndereco_FormAluno);
+        txtFone = (EditText) findViewById(R.id.txtFone_FormAluno);
+        txtSite = (EditText) findViewById(R.id.txtSite_FormAluno);
         txtNota = (RatingBar) findViewById(R.id.rtbNota_FormAluno);
         btnSalvar = (Button) findViewById(R.id.btnSalvar_FormAluno);
     }

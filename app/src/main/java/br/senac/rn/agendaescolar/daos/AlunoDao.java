@@ -53,7 +53,7 @@ public class AlunoDao extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
             lstAlunos.add(new Aluno(
-                    cursor.getInt(cursor.getColumnIndex("nota")),
+                    cursor.getInt(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("nome")),
                     cursor.getString(cursor.getColumnIndex("endereco")),
                     cursor.getString(cursor.getColumnIndex("fone")),
