@@ -65,10 +65,7 @@ public class AlunoDao extends SQLiteOpenHelper {
         return lstAlunos;
     }
 
-    public void inserir(Aluno aluno) {
-        //MEtodo que indica ao banco escrever no banco de dados.
-        db = getWritableDatabase();
-
+    private ContentValues AtribuiValoresAlunos(Aluno aluno){
         ContentValues values = new ContentValues();
 
         values.put("nome", aluno.getNome());
@@ -77,27 +74,31 @@ public class AlunoDao extends SQLiteOpenHelper {
         values.put("site", aluno.getSite());
         values.put("nota", aluno.getNota());
 
-        db.insert("ALUNOS", null, values);
+        return  values;
+    }
+
+    public void inserir(Aluno aluno) {
+        //MEtodo que indica ao banco escrever no banco de dados.
+        db = getWritableDatabase();
+
+        db.insert("ALUNOS", null, AtribuiValoresAlunos(aluno));
     }
 
     public void atualiza(Aluno aluno) {
         //MEtodo que indica ao banco escrever no banco de dados.
         db = getWritableDatabase();
 
-        ContentValues values = new ContentValues();
+        String where = " id = ?";
+        String[] parametros = {aluno.getId().toString()};
 
-        values.put("nome", aluno.getNome());
-        values.put("endereco", aluno.getEndereco());
-        values.put("fone", aluno.getFone());
-        values.put("site", aluno.getSite());
-        values.put("nota", aluno.getNota());
-
-        db.update("ALUNOS", values, " id = " + aluno.getId().toString(), null);
+        db.update("ALUNOS", AtribuiValoresAlunos(aluno), where, parametros);
     }
 
     public void deletar(int id) {
         //MEtodo que indica ao banco escrever no banco de dados.
-        db = getReadableDatabase();
-        db.delete("ALUNOS", "id = " + id, null);
+        db = getWritableDatabase();
+        String where = " id = ?";
+        String[] parametros = {String.valueOf(id)};
+        db.delete("ALUNOS", where, parametros);
     }
 }

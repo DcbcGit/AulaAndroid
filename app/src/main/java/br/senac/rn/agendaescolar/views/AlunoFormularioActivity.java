@@ -37,7 +37,7 @@ public class AlunoFormularioActivity extends AppCompatActivity {
             txtEndereco.setText(alunoEdicao.getEndereco());
             txtFone.setText(alunoEdicao.getFone());
             txtSite.setText(alunoEdicao.getSite());
-            txtNota.setRating((float) alunoEdicao.getNota());
+            txtNota.setProgress((int)alunoEdicao.getNota());
         }
     }
 
@@ -58,7 +58,7 @@ public class AlunoFormularioActivity extends AppCompatActivity {
         aluno.setEndereco(txtEndereco.getText().toString());
         aluno.setSite(txtSite.getText().toString());
         aluno.setFone(txtFone.getText().toString());
-        aluno.setNota(txtNota.getRating());
+        aluno.setNota(txtNota.getProgress());
 
         return aluno;
     }

@@ -38,6 +38,19 @@ public class ListaAlunosActivity extends AppCompatActivity {
         registerForContextMenu(btnIncluir);
 
         btnIncluir.setOnClickListener(onBtnCadastrar);
+
+        lstViewAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int pos, long id) {
+                intentAlunoCadastro((Aluno)lstViewAlunos.getItemAtPosition(pos));
+            }
+        });
+    }
+
+    public void intentAlunoCadastro(Aluno aluno){
+        Intent intent = new Intent(ListaAlunosActivity.this, AlunoFormularioActivity.class);
+        intent.putExtra("aluno",aluno);
+        startActivity(intent);
     }
 
     @Override
@@ -91,9 +104,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 //startActivity(intAV);
                 break;
             case R.id.item_editar:
-                Intent intent = new Intent(ListaAlunosActivity.this, AlunoFormularioActivity.class);
-                intent.putExtra("aluno",alunoSele);
-                startActivity(intent);
+                intentAlunoCadastro(alunoSele);
                 break;
             case R.id.item_apagar:
                     new AlunoDao(this).deletar(alunoSele.getId());
