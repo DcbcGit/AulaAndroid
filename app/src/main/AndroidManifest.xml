@@ -3,6 +3,14 @@
     package="br.senac.rn.agendaescolar.views">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- <uses-permission android:name="android.permission.CAMERA"/>
+<uses-feature android:name="android.hardware.camera2" android:required="true"/>
+    -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
 
     <application
         android:allowBackup="true"
@@ -20,8 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlunoFormularioActivity"
-                  android:label="Formulario Aluno"/>
+        <activity
+            android:name=".AlunoFormularioActivity"
+            android:label="Formulario Aluno" />
+        <activity android:name=".TelaInicial"></activity>
     </application>
 
 </manifest>

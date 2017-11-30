@@ -4,6 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Foto" />
+
+    <ImageView
+        android:id="@+id/imgAluno_FormAluno"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/person" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,8 +77,8 @@
         android:layout_gravity="center_horizontal"
         android:hint="nota aluno"
         android:max="10"
-        android:stepSize=".5"
-        android:numStars="5" />
+        android:numStars="5"
+        android:stepSize=".5" />
 
     <Button
         android:id="@+id/btnSalvar_FormAluno"

@@ -1,8 +1,5 @@
 package br.senac.rn.agendaescolar.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 public class Aluno implements Serializable {
@@ -13,9 +10,9 @@ public class Aluno implements Serializable {
     private String fone;
     private String site;
     private double nota;
+    private String foto;
 
-    public Aluno() {
-    }
+    public Aluno(){}
 
     public Aluno(String nome, String endereco, String fone, String site, double nota) {
         this.nome = nome;
@@ -25,7 +22,16 @@ public class Aluno implements Serializable {
         this.nota = nota;
     }
 
-    public Aluno(Integer id, String nome, String endereco, String fone, String site, double nota) {
+    public Aluno(String nome, String endereco, String fone, String site, double nota, String foto) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.fone = fone;
+        this.site = site;
+        this.nota = nota;
+        this.foto = foto;
+    }
+
+    public Aluno(Integer id, String nome, String endereco, String fone, String site, double nota, String foto) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -116,4 +122,11 @@ public class Aluno implements Serializable {
         return this.nota;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

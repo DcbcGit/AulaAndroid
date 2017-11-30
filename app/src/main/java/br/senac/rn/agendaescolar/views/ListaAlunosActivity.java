@@ -1,9 +1,11 @@
 package br.senac.rn.agendaescolar.views;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import br.senac.rn.agendaescolar.adapter.AlunoAdapter;
 import br.senac.rn.agendaescolar.daos.AlunoDao;
 import br.senac.rn.agendaescolar.models.Aluno;
 
@@ -42,14 +45,22 @@ public class ListaAlunosActivity extends AppCompatActivity {
         lstViewAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int pos, long id) {
-                intentAlunoCadastro((Aluno)lstViewAlunos.getItemAtPosition(pos));
+                intentAlunoCadastro((Aluno) lstViewAlunos.getItemAtPosition(pos));
             }
         });
     }
 
-    public void intentAlunoCadastro(Aluno aluno){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizaLista();
+
+        Toast.makeText(this, "onResume", Toast.LENGTH_LONG).show();
+    }
+
+    public void intentAlunoCadastro(Aluno aluno) {
         Intent intent = new Intent(ListaAlunosActivity.this, AlunoFormularioActivity.class);
-        intent.putExtra("aluno",aluno);
+        intent.putExtra("aluno", aluno);
         startActivity(intent);
     }
 
@@ -107,8 +118,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 intentAlunoCadastro(alunoSele);
                 break;
             case R.id.item_apagar:
-                    new AlunoDao(this).deletar(alunoSele.getId());
-                    this.atualizaLista();
+                new AlunoDao(this).deletar(alunoSele.getId());
+                this.atualizaLista();
                 break;
         }
 
@@ -131,8 +142,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     protected void atualizaLista() {
+
+        //new AcessoAssyncClass().execute();
         lstAlunos = new AlunoDao(this).buscaTodos();
-        ArrayAdapter<Aluno> adap = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, lstAlunos);
+        AlunoAdapter adap = new AlunoAdapter(this, lstAlunos);
+        // adap = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, lstAlunos);
         lstViewAlunos.setAdapter(adap);
     }
 
@@ -146,4 +160,32 @@ public class ListaAlunosActivity extends AppCompatActivity {
             }
         };
     }
+
+    public class AcessoAssyncClass extends AsyncTask {
+
+        private ProgressDialog dialog;
+        List<Aluno> alunosAssuyn;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(ListaAlunosActivity.this, "Aguarde", "Carregando Dados...");
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            dialog.dismiss();
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            lstAlunos = new AlunoDao(ListaAlunosActivity.this).buscaTodos();
+            AlunoAdapter adap = new AlunoAdapter(ListaAlunosActivity.this, lstAlunos);
+            // adap = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, lstAlunos);
+            lstViewAlunos.setAdapter(adap);
+            return null;
+        }
+    }
 }
+
+

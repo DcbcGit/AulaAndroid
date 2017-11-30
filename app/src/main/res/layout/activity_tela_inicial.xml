@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TabWidget >
+
+                <Button
+                    android:id="@+id/btnNovoAluno_ACTInicial"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/fundo_botao_adicionar"
+
+                    android:stateListAnimator="@null"
+                    android:text="Novo Aluno"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </TabWidget>
+
+            <TabWidget >
+
+                <Button
+                    android:id="@+id/btnNovaMateria_ACTInicial"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/fundo_botao_adicionar"
+                    android:elevation="10dp"
+
+                    android:stateListAnimator="@null"
+                    android:text="Novo Materia"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </TabWidget>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+</RelativeLayout>

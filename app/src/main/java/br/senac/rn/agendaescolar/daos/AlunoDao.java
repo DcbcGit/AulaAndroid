@@ -11,35 +11,41 @@ import java.util.List;
 
 import br.senac.rn.agendaescolar.models.Aluno;
 
-/**
- * Created by A9236541 on 14/11/2017.
- */
-
 public class AlunoDao extends SQLiteOpenHelper {
 
     SQLiteDatabase db;
+    static final int versao = 2;
 
     public AlunoDao(Context context) {
-        super(context, "AgendaDB", null, 1);
+        super(context, "AgendaDB", null, 2);
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "";
-        sql += "CREATE TABLE ALUNOS( ";
+        sql += "CREATE TABLE IF NOT EXISTS ALUNOS( ";
         sql += "id INTEGER PRIMARY KEY,";
         sql += "nome TEXT,";
         sql += "endereco TEXT,";
         sql += "fone TEXT,";
         sql += "site TEXT,";
-        sql += "nota REAL);";
+        sql += "nota REAL );";
 
         db.execSQL(sql);
     }
 
+
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int verAnt, int verNova) {
+
+        switch (verNova)
+        {
+            case 2:
+                db.execSQL("ALTER TABLE ALUNOS ADD COLUMN foto TEXT");
+                break;
+        }
+
 
     }
 
@@ -58,7 +64,8 @@ public class AlunoDao extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("endereco")),
                     cursor.getString(cursor.getColumnIndex("fone")),
                     cursor.getString(cursor.getColumnIndex("site")),
-                    cursor.getDouble(cursor.getColumnIndex("nota"))
+                    cursor.getDouble(cursor.getColumnIndex("nota")),
+                    cursor.getString(cursor.getColumnIndex("foto"))
             ));
         }
 
@@ -73,6 +80,7 @@ public class AlunoDao extends SQLiteOpenHelper {
         values.put("fone", aluno.getFone());
         values.put("site", aluno.getSite());
         values.put("nota", aluno.getNota());
+        values.put("foto", aluno.getFoto());
 
         return  values;
     }
